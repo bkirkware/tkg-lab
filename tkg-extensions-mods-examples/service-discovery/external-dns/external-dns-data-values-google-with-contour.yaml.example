@@ -16,6 +16,7 @@ externalDns:
     - --policy=upsert-only #! would prevent ExternalDNS from deleting any records, omit to enable full synchronization
     - --google-project=REPlACE_ME_WITH_GCP_PROJECT_ID
     - --registry=txt
+    - --txt-prefix=txt
     #@overlay/replace
     env:
     - name: GOOGLE_APPLICATION_CREDENTIALS

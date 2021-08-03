@@ -12,7 +12,8 @@ $TKG_LAB_SCRIPTS/03-post-deploy-mgmt-cluster.sh
 # Management Step 2
 # TMC Attach NOOP
 # Management Step 3
-$TKG_LAB_SCRIPTS/create-dns-zone.sh
+# [BK] Commented Out
+#$TKG_LAB_SCRIPTS/create-dns-zone.sh
 $TKG_LAB_SCRIPTS/retrieve-lets-encrypt-ca-cert.sh
 # Management Step 6
 if [ "$IAAS" = "vsphere" ];

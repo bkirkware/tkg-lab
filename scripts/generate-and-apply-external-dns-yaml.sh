@@ -11,6 +11,8 @@ fi
 CLUSTER_NAME=$1
 export INGRESS_FQDN=$2
 DNS_PROVIDER=$(yq e .dns.provider $PARAMS_YAML)
+# Added this line
+GCLOUD_PROJECT=$(yq e .gcloud.project $PARAMS_YAML)
 
 kubectl config use-context $CLUSTER_NAME-admin@$CLUSTER_NAME
 
@@ -39,7 +41,8 @@ then
 
   cp tkg-extensions-mods-examples/service-discovery/external-dns/external-dns-data-values-google-with-contour.yaml.example generated/$CLUSTER_NAME/external-dns/external-dns-data-values.yaml
 
-  export DOMAIN_FILTER=--domain-filter=$(yq e .subdomain $PARAMS_YAML)
+  # [BK] Changed this line to reference gcloud.dns-zone
+  export DOMAIN_FILTER=--domain-filter=$(yq e .gcloud.dns-zone $PARAMS_YAML)
   export PROJECT_ID=--google-project=$(yq e .gcloud.project $PARAMS_YAML)
   yq e -i '.externalDns.deployment.args[3] = env(DOMAIN_FILTER)' generated/$CLUSTER_NAME/external-dns/external-dns-data-values.yaml
   yq e -i '.externalDns.deployment.args[6] = env(PROJECT_ID)' generated/$CLUSTER_NAME/external-dns/external-dns-data-values.yaml
