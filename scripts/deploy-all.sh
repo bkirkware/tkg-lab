@@ -2,6 +2,8 @@
 
 TKG_LAB_SCRIPTS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $TKG_LAB_SCRIPTS/set-env.sh
+#source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+#source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
 IAAS=$(yq e .iaas $PARAMS_YAML)
 
@@ -15,7 +17,8 @@ then
   $TKG_LAB_SCRIPTS/tmc-register-mc.sh
 fi
 # Management Step 3
-$TKG_LAB_SCRIPTS/create-dns-zone.sh
+# [BK] Commented Out
+#$TKG_LAB_SCRIPTS/create-dns-zone.sh
 $TKG_LAB_SCRIPTS/retrieve-lets-encrypt-ca-cert.sh
 # Management Step 6
 $TKG_LAB_SCRIPTS/generate-and-apply-contour-yaml.sh $(yq e .management-cluster.name $PARAMS_YAML)
