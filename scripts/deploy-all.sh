@@ -2,6 +2,8 @@
 
 TKG_LAB_SCRIPTS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $TKG_LAB_SCRIPTS/set-env.sh
+#source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+#source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
 IAAS=$(yq e .iaas $PARAMS_YAML)
 
