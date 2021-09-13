@@ -1,6 +1,6 @@
-# Create new workload cluster
+# Create new Shared Services Cluster
 
-Here we will deploy a new workload cluster for use as the shared services cluster.  The shared services cluster in our opinionated deployment is a special purpose workload cluster where common services are deployed.  All workload clusters will have similar steps for initial setup.
+Here we will deploy a new workload cluster for use as the Shared Services cluster.  The shared services cluster in our opinionated deployment is a special purpose workload cluster where common services are deployed.  All workload clusters will have similar steps for initial setup.
 
 Here we are pulling the following values from the `params.yaml` file.  See examples
 
@@ -16,7 +16,7 @@ We need to setup a cluster configuration file for our new workload cluster.
 
 Then we ask the management cluster to create the new workload cluster.
 
->Special Note for AWS Deployments: The default behavior is for each cluster (management and workload clusters) to be provisioned in their own VPC.  However, in order to conserve VPC's, we will deploy the workload clusters in the VPC and subnets as the management cluster.  This process is described in the [TKG Docs](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.3/vmware-tanzu-kubernetes-grid-13/GUID-tanzu-k8s-clusters-aws.html#deploy-a-cluster-that-shares-a-vpc-and-nat-gateways-with-the-management-cluster-3) and done automatically via the script below.
+>Special Note for AWS Deployments: The default behavior is for each cluster (management and workload clusters) to be provisioned in their own VPC.  However, in order to conserve VPC's, we will deploy the workload clusters in the VPC and subnets as the management cluster.  This process is described in the [TKG Docs](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-tanzu-k8s-clusters-aws.html#deploy-a-cluster-that-shares-a-vpc-and-nat-gateways-with-the-management-cluster-3) and done automatically via the script below.
 
 All of the steps above can be accomplished by running the following script:
 

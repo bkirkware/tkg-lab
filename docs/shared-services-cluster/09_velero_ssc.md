@@ -1,10 +1,10 @@
-# Enable Data Protection and Setup Nightly Backup
+# Enable Data Protection and Setup Nightly Backup on Shared Services Cluster
 
 ## Install Velero client
 
 Even though Tanzu Mission Control will manage your data protection amd lifecycle velero on the cluster, at times it may be useful to have the velero cli.
 
-Download and install the Velero cli from TKG 1.3.1 at https://www.vmware.com/go/get-tkg.
+Download and install the Velero cli from TKG 1.4.0 at https://www.vmware.com/go/get-tkg.
 
 ## Setup Your Data Protection Target
 
