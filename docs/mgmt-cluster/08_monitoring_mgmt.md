@@ -2,7 +2,7 @@
 
 ## Overview
 
-Tanzu offers essential cluster monitoring with Prometheus and Grafana through TKG extensions.  When deployed to a cluster, you have metrics collection and storage, alerting, and dashboards.
+Tanzu offers essential cluster monitoring with Prometheus and Grafana through TKG packages.  When deployed to a cluster, you have metrics collection and storage, alerting, and dashboards.
 
 >Note: This is an in-cluster service.  Using this approach, you would have to deploy Prometheus and Grafana to each cluster with individual storage and dashboards for each cluster.  Alternatively, Tanzu Observability provides multi-cluster observability and is part of the Tanzu Advanced offering.
 
@@ -14,9 +14,9 @@ The scripts to prepare and execute the YAML to deploy prometheus and grafana dep
 
 ```yaml
 # Leave prometheus-fqdn blank if you choose not to expose it, there is no auth
-management-cluster.prometheus-fqdn: prometheus.highgarden.tkg-vsphere-lab.winterfell.live
+management-cluster.prometheus-fqdn: prometheus.dragonstone.tkg-vsphere-lab.winterfell.live
 # Grafana has auth
-management-cluster.grafana-fqdn: grafana.highgarden.tkg-vsphere-lab.winterfell.live
+management-cluster.grafana-fqdn: grafana.dragonstone.tkg-vsphere-lab.winterfell.live
 grafana.admin-password: REDACTED
 ```
 

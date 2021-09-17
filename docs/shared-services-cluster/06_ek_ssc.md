@@ -1,6 +1,6 @@
 # Install Elasticsearch and Kibana
 
-We will deploy Elasticsearch and Kibana as a target for logs.  This is [one of several potential targets for TKG to send logs](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.3/vmware-tanzu-kubernetes-grid-13/GUID-extensions-logging-fluentbit.html).
+We will deploy Elasticsearch and Kibana as a target for logs.  This is [one of several potential targets for TKG to send logs](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.4/vmware-tanzu-kubernetes-grid-14/GUID-packages-logging-fluentbit.html).
 
 This is a minimalizt and POC quality deployment of Elasticsearh and Kibana.  This is not a component of Tanzu.  This deployment is just for the purpose of demostration purpose.  See notes below if you face issues with the Elasticsearch deployment.
 
@@ -16,6 +16,15 @@ shared-services-cluster.kibana-fqdn: logs.dorn.tkg-aws-e2-lab.winterfell.live
 ```
 
 ## Prepare Manifests and Deploy Elasticsearch and Kibana
+
+Elasticsearch and kibana images are pulled from Docker Hub.  Ensure your credentials are in the `params.yaml` file in order to avoid rate limit errors.
+
+```yaml
+dockerhub:
+  username: REDACTED # Your dockerhub username
+  password: REDACTED # Your dockerhub password
+  email: REDACTED # Your dockerhub email
+```
 
 Prepare the YAML manifests for the related elasticsearch and kibana K8S objects.  Manifests will be output into `generated/$SHARED_SERVICES_CLUSTER_NAME/elasticsearch-kibana/` in case you want to inspect.
 
@@ -33,7 +42,7 @@ curl -v http://$(yq e .shared-services-cluster.elasticsearch-fqdn $PARAMS_YAML)
 
 ## Go to Next Step
 
-[Install FluentBit](07_fluentbit_ssc.md)
+[Install FluentBit on Shared Services Cluster](07_fluentbit_ssc.md)
 
 ## Troubleshooting Steps
 
