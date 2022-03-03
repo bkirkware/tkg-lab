@@ -20,9 +20,7 @@ source $TKG_LAB_SCRIPTS/set-env.sh
 #IAAS=$(yq e .iaas $PARAMS_YAML)
 #$TKG_LAB_SCRIPTS/deploy-cert-manager.sh $(yq e .workload-cluster.name $PARAMS_YAML)
 $TKG_LAB_SCRIPTS/generate-and-apply-contour-yaml.sh $(yq e .workload-cluster.name $PARAMS_YAML)
-$TKG_LAB_SCRIPTS/generate-and-apply-external-dns-yaml.sh \
-  $(yq e .workload-cluster.name $PARAMS_YAML) \
-  $(yq e .workload-cluster.ingress-fqdn $PARAMS_YAML)
+$TKG_LAB_SCRIPTS/generate-and-apply-external-dns-yaml.sh $(yq e .workload-cluster.name $PARAMS_YAML)
 $TKG_LAB_SCRIPTS/generate-and-apply-cluster-issuer-yaml.sh $(yq e .workload-cluster.name $PARAMS_YAML)
 # Workload Step 6
 $TKG_LAB_SCRIPTS/generate-and-apply-fluent-bit-yaml.sh $(yq e .workload-cluster.name $PARAMS_YAML)

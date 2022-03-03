@@ -1,22 +1,24 @@
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: grafana-cert
-  namespace: tanzu-system-monitoring
+  namespace: tanzu-system-dashboards
 spec:
   # Secret names are always required.
   secretName: grafana-cert-tls
   duration: 2160h # 90d
   renewBefore: 360h # 15d
-  organization:
-  - vmware
+  subject: 
+    organizations:
+    - vmware
   isCA: false
-  keySize: 2048
-  keyAlgorithm: rsa
-  keyEncoding: pkcs1
+  privateKey:
+    size: 2048
+    algorithm: RSA
+    encoding: PKCS1
   # At least one of a DNS Name, USI SAN, or IP address is required.
   dnsNames:
-  # 
+  #
   issuerRef:
     name: letsencrypt-contour-cluster-issuer
     # We can reference ClusterIssuers by changing the kind here.

@@ -46,26 +46,31 @@ management-cluster:
   pinniped-fqdn: pinniped.dragonstone.tkg-aws-e2-lab.winterfell.live
   prometheus-fqdn: prometheus.dragonstone.tkg-aws-e2-lab.winterfell.live
   grafana-fqdn: grafana.dragonstone.tkg-aws-e2-lab.winterfell.live
-  controlplane-endpoint: 192.168.7.180 # only required for vsphere iaas
-  metallb-start-ip: 192.168.7.200 # only required for vsphere iaas
-  metallb-end-ip: 192.168.7.209 # only required for vsphere iaas
+  controlplane-endpoint: 192.168.7.180 # only required for vsphere iaas, must belog to avi-management-cluster-vip-network-cidr
 shared-services-cluster:
   worker-replicas: 2
+  worker-replicas-max: 4
+  worker-autoscaler-enabled: true
   name: dorn
   ingress-fqdn: '*.dorn.tkg-aws-e2-lab.winterfell.live'
   elasticsearch-fqdn: elasticsearch.dorn.tkg-aws-e2-lab.winterfell.live
   kibana-fqdn: logs.dorn.tkg-aws-e2-lab.winterfell.live
   prometheus-fqdn: prometheus.dorn.tkg-aws-e2-lab.winterfell.live
   grafana-fqdn: grafana.dorn.tkg-aws-e2-lab.winterfell.live
-  controlplane-endpoint: 192.168.7.181 # only required for vsphere iaas
-  kubernetes-version: v1.20.5---vmware.1-tkg.1 # To Explicitly set to v1.20.5---vmware.1-tkg.1 version (optional)
+  controlplane-endpoint: 192.168.7.181 # only required for vsphere iaas, must belog to avi-management-cluster-vip-network-cidr
+  kubernetes-version: # To Explicitly set a kubernetes version use`tanzu kubernetes-release get` and choose the appropriate value from the name column
+  antrea-nodeportlocal-enabled: false
 workload-cluster:
-  worker-replicas: 2
+  worker-replicas: 1
+  worker-replicas-max: 3
+  worker-autoscaler-enabled: true
   name: highgarden
   ingress-fqdn: '*.highgarden.tkg-aws-e2-lab.winterfell.live'
   prometheus-fqdn: prometheus.highgarden.tkg-vsphere-lab.winterfell.live # Leave this blank if you choose not to expose prometheus
   grafana-fqdn: grafana.highgarden.tkg-vsphere-lab.winterfell.live
-  controlplane-endpoint: 192.168.7.182 # only required for vsphere iaas
+  controlplane-endpoint: 192.168.7.182 # only required for vsphere iaas, must belog to avi-management-cluster-vip-network-cidr
+  kubernetes-version: # To Explicitly set a kubernetes version use`tanzu kubernetes-release get` and choose the appropriate value from the name column
+  antrea-nodeportlocal-enabled: false
 okta:
   auth-server-fqdn: dev-677945.okta.com
   tkg-app-client-id: REDACTED
@@ -83,11 +88,9 @@ wavefront:
   jaeger-app-name-prefix: dpfeffer-acme-fitness
 velero:
   bucket: pa-dpfeffer-mgmt-velero
-  region: us-east-2
 harbor:
   admin-password: "VMware1!"
   harbor-cn: harbor.dorn.tkg-aws-e2-lab.winterfell.live
-  notary-cn: notary.dorn.tkg-aws-e2-lab.winterfell.live
 #  blob-storage:
 #    type: s3 # Default is PVC, and can optionally be S3/MinIO
 #    regionendpoint: http://minio.server:9000 # Not required for AWS S3
@@ -110,13 +113,23 @@ kubeapps:
 grafana:
   admin-password: REDACTED
 avi:
-  avi-enable: "true"
   avi-ca-data: encodedlongstring
   avi-cloud-name: Default-Cloud
   avi-controller: 192.168.14.190
   avi-data-network: VIP-VLAN15-PG
   avi-data-network-cidr: 192.168.15.0/24
+  avi-management-cluster-vip-network: VIP-VLAN15-PG
+  avi-management-cluster-vip-network-cidr: 192.168.15.0/24
   avi-labels: ""
   avi-password: "VMware1!"
   avi-service-engine-group: Default-Group
   avi-username: admin
+dockerhub:
+  username: REDACTED # Your dockerhub username
+  password: REDACTED # Your dockerhub password
+  email: REDACTED # Your dockerhub email
+minio:
+  server-fqdn: minio.dorn.tkg-aws-e2-lab.winterfell.live
+  root-user: REDACTED
+  root-password: REDACTED
+  persistence-size: 40Gi

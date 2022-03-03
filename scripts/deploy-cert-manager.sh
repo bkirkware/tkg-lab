@@ -12,4 +12,12 @@ CLUSTER_NAME=$1
 
 kubectl config use-context $CLUSTER_NAME-admin@$CLUSTER_NAME
 
-kapp deploy -a cert-manager -n tanzu-kapp -y -f tkg-extensions/cert-manager/
+# Retrieve the most recent version number.  There may be more than one version available and we are assuming that the most recent is listed last,
+# thus supplying -1 as the index of the array
+VERSION=$(tanzu package available list -oyaml | yq eval '.[] | select(.display-name == "cert-manager") | .latest-version' -)
+
+tanzu package install cert-manager \
+    --package-name cert-manager.tanzu.vmware.com \
+    --version $VERSION \
+    --namespace tanzu-kapp \
+    --poll-timeout 10m0s
