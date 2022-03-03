@@ -5,18 +5,19 @@ The following section should be added to or exist in your local params.yaml file
 
 ```yaml
 harbor:
-  harbor-cn: harbor.<shared-cluster domain name>
   admin-password: FOO
+  harbor-cn: harbor.<shared-cluster domain name>
 ```
-> NOTE: TKG 1.3 Extensions force the Notary FQDN to be "notary."+harbor-cn
+> NOTE: Since TKG 1.3 the Notary FQDN is forced to be "notary."+harbor-cn
 
 ### S3 Backing for Harbor
 The default settings for Harbor use PVCs behind the registry pods for blob storage.  Persistent Volume performance can be slow in home labs, or environments with poor storage or networking performance.  You can opt in to using S3 compatible storage as the backing for Harbor, and this can dramatically increase the performance in these environments.
 
 To use S3 blob storage for images managed by Harbor, you can use the following settings in your params.yaml file:
-
+> NOTE: There is a known problem with the first TKG 1.4 that prevents this from working fine when S3 storage is configured. This will be updated as soon as there is a fix.
 ```yaml
 harbor:
+  admin-password: FOO
   harbor-cn: harbor.<shared-cluster domain name>
   blob-storage:
     type: s3 # Default is PVC, and can optionally be S3/MinIO
@@ -30,7 +31,7 @@ harbor:
 
 Since this storage is external to the process, you will need to clean it up if you decide to tear down your environment.
 
-## Prepare Manifests and Deploy Harbor Extension
+## Prepare Manifests and Deploy Harbor Package
 Harbor Registry will be installed in the shared services cluster, as it is going to be available to all users.  Prepare and deploy the YAML manifests for the related Harbor K8S objects.  Manifest will be output into `generated/$SHAREDSVC_CLUSTER_NAME/harbor` in case you want to inspect.
 
 ```bash
@@ -60,12 +61,12 @@ open https://$(yq e .harbor.harbor-cn $PARAMS_YAML)
 
 1. Log into your Okta account you created as part of the [Okta Setup Lab](../mgmt-cluster/04_okta_mgmt.md).  The URL should be in your `params.yaml` file under okta.auth-server-fqdn.
 
-2. Choose Applications (side menu) > Application.   Then click `Create App Integration` button.  Then selec `OIDC - OpenID Connect` radion option. For Application Type, choose `Web Application` radion button.  Then click `Next` button.
-  
+2. Choose Applications (side menu) > Application.   Then click `Create App Integration` button.  Then select `OIDC - OpenID Connect` radio option. For Application Type, choose `Web Application` radio button.  Then click `Next` button.
+
 3. Complete the form as follows, and then click Done.
   - Give your app a name: `Harbor`
   - For Grant type, check Authorization Code and Refresh Token
-  - Sign-in redirect URIs: `https://<harbor.harbor-cn from $PARAMS_YAML>/c/oidc/callback` #
+  - Sign-in redirect URIs: `https://<harbor.harbor-cn from $PARAMS_YAML>/c/oidc/callback`
 ```bash
 echo "https://$(yq e .harbor.harbor-cn $PARAMS_YAML)/c/oidc/callback"
 ```
@@ -155,4 +156,4 @@ docker login https://$(yq e .harbor.harbor-cn $PARAMS_YAML) -u alana
 
 At this point the shared services cluster is complete.  Go back and complete the management cluster setup tasks.
 
-[Install FluentBit](../mgmt-cluster/09_fluentbit_mgmt.md)
+[Install FluentBit on Management Cluster](../mgmt-cluster/09_fluentbit_mgmt.md)

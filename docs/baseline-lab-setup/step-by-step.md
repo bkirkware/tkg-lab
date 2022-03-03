@@ -18,10 +18,9 @@ export PARAMS_YAML=local-config/params.yaml
 ### 2. [Attach Management Cluster to TMC](../mgmt-cluster/02_attach_tmc_mgmt.md)
 ### 3. [Configure DNS and Prep Certificate Signing](../mgmt-cluster/03_dns_certs_mgmt.md)
 ### 4. [Configure Okta](../mgmt-cluster/04_okta_mgmt.md)
-### 5. [Retrieve TKG Extensions](../mgmt-cluster/05_extensions_mgmt.md)
-### 6. [Install Contour Ingress Controller](../mgmt-cluster/06_contour_mgmt.md)
-### 7. [Update Pinniped Configuration](../mgmt-cluster/07_update_pinniped_config_mgmt.md)
-### 8. [Add monitoring](../mgmt-cluster/08_monitoring_mgmt.md)
+### 5. [Install Contour Ingress Controller](../mgmt-cluster/06_contour_mgmt.md)
+### 6. [Update Pinniped Configuration](../mgmt-cluster/07_update_pinniped_config_mgmt.md)
+### 7. [Add monitoring](../mgmt-cluster/08_monitoring_mgmt.md)
 
 ## Setup Shared Services Cluster
 ### 1. [Create new Shared Services Cluster](../shared-services-cluster/01_install_tkg_ssc.md)
@@ -31,6 +30,7 @@ export PARAMS_YAML=local-config/params.yaml
 ### 5. [Install ElasticSearch and Kibana](../shared-services-cluster/06_ek_ssc.md)
 ### 6. [Install FluentBit](../shared-services-cluster/07_fluentbit_ssc.md)
 ### 7. [Add monitoring to cluster](../shared-services-cluster/08_monitoring_ssc.md)
+### 8. [Deploy Minio to Shared Services Cluster](../shared-services-cluster/08_5_minio_ssc.md)
 ### 8. [Enable Data Protection and Setup Nightly Backup](../shared-services-cluster/09_velero_ssc.md)
 ### 9. [Install Harbor](../shared-services-cluster/10_harbor.md)
 

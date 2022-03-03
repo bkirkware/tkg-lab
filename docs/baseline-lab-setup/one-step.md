@@ -15,14 +15,18 @@ export PARAMS_YAML=local-config/params.yaml
 
 Ensure that your copy of `params.yaml` indicates your IaaS as `aws`, `azure` or `vsphere` appropriately.
 
+## Ensure credentials-velero file is in keys directory
+
+Ensure the credentials-velero file is in keys directory as per [Install Velero and Setup Nightly Backup on Management Cluster](../mgmt-cluster/10_velero_mgmt.md)
+
 ## Azure Only - Configure the Azure CLI and Accept the TKG Azure Base Image License
 
 Ensure the `az` CLI is installed and configured. The deploy all script will use `az` to deploy TKG.
 
-To run management cluster VMs on Azure, [accept the license](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.3/vmware-tanzu-kubernetes-grid-13/GUID-mgmt-clusters-azure.html#accept-the-base-image-license-2) for their base Kubernetes version and machine OS.
+To run management cluster VMs on Azure, [accept the license](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid/1.5/vmware-tanzu-kubernetes-grid-15/GUID-mgmt-clusters-azure.html#accept-the-base-image-license-4) for their base Kubernetes version and machine OS.
 
 ```
-az vm image terms accept --publisher vmware-inc --offer tkg-capi --plan k8s-1dot20dot5-ubuntu-2004
+az vm image terms accept --publisher vmware-inc --offer tkg-capi --plan k8s-1dot22dot5-ubuntu-2004
 ```
 
 ## Execute the Deploy All Script

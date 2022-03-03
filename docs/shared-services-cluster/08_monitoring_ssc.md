@@ -26,4 +26,4 @@ Prepare the YAML manifests for the related grafana k8s objects.  Manifests will 
 
 ## Go to Next Step
 
-[Enable Data Protection and Setup Nightly Backup](09_velero_ssc.md)
+[Install Minio on Shared Services Cluster](08_5_minio_ssc.md)
